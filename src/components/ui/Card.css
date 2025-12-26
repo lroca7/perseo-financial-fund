@@ -1,0 +1,22 @@
+.card {
+    background: var(--color-bg-secondary);
+    /* Optional Glass Effect if supported/desired, otherwise solid premium dark */
+    /* background: var(--glass-bg); 
+     backdrop-filter: blur(12px); */
+
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow);
+    padding: var(--spacing-lg);
+    color: var(--color-text-primary);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    /* Subtle lift on hover for dashboard feel - currently disabled */
+    /* transform: translateY(-2px); */
+}
+
+.card-no-padding {
+    padding: 0;
+}
