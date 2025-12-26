@@ -3,12 +3,15 @@ import { Card } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
 import { memberService } from '../../services/memberService';
 import { type Member } from '../../services/types';
-import './Members.css';
 import { Plus } from 'lucide-react';
+import { Modal } from '../../components/ui/Modal';
+import { CreateMemberForm } from '../../components/business/members/CreateMemberForm';
+import './Members.css';
 
 export const Members: React.FC = () => {
     const [members, setMembers] = useState<Member[]>([]);
     const [loading, setLoading] = useState(true);
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
     useEffect(() => {
         loadMembers();
@@ -29,7 +32,7 @@ export const Members: React.FC = () => {
         <div>
             <div className="members-header">
                 <h1>Gestión de Miembros</h1>
-                <Button size="md" onClick={() => alert('Próximamente: Modal de creación')}>
+                <Button size="md" onClick={() => setIsCreateModalOpen(true)}>
                     <Plus size={18} />
                     Nuevo Miembro
                 </Button>
@@ -73,6 +76,20 @@ export const Members: React.FC = () => {
                     </table>
                 )}
             </Card>
+
+            <Modal
+                isOpen={isCreateModalOpen}
+                onClose={() => setIsCreateModalOpen(false)}
+                title="Nuevo Miembro"
+            >
+                <CreateMemberForm
+                    onSuccess={() => {
+                        setIsCreateModalOpen(false);
+                        loadMembers();
+                    }}
+                    onCancel={() => setIsCreateModalOpen(false)}
+                />
+            </Modal>
         </div>
     );
 };
